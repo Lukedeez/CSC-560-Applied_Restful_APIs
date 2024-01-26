@@ -12,7 +12,7 @@ var userSchema = new mongoose.Schema({
     created: { type: Date, default: Date.now },
     lastLogin: { type: Date, default: Date.now },
 },
-{ collection: 'user' }
+{ collection: 'users' }
 );
 
 userSchema.index({email : 1}, {unique:true});
@@ -28,7 +28,7 @@ var feedSchema = new mongoose.Schema({
     createdDate: { type: Date, default: Date.now },
     modifiedDate: { type: Date, default: Date.now },
     },
-    { collection: 'feed' }
+    { collection: 'feeds' }
 );
 feedSchema.index({feedURL : 1}, {unique:true});
 feedSchema.index({link : 1}, {unique:true, sparse:true});
@@ -71,14 +71,17 @@ exports.addAPIRouter = function(app, mongoose, stormpath) {
     });
     app.post('/*', function(req, res, next) {
         res.contentType('application/json');
+        console.log('Router for POST /* ');
         next();
     });
     app.put('/*', function(req, res, next) {
         res.contentType('application/json');
+        console.log('Router for PUT /* ');
         next();
     });
     app.delete('/*', function(req, res, next) {
         res.contentType('application/json');
+        console.log('Router for DELETE /* ');
         next();
     });
 
@@ -88,19 +91,23 @@ exports.addAPIRouter = function(app, mongoose, stormpath) {
     router.post('/user/enroll', function(req, res) {
         logger.debug('Router for /user/enroll');
     });
-    //router.get('/feeds', stormpath.apiAuthenticationRequired, function(req, res) {
-    //    logger.debug('Router for /feeds');
-    //});
-    //router.put('/feeds/subscribe', 
-    //   stormpath.apiAuthenticationRequired, function(req, res) {
-    //        logger.debug('Router for /feeds');
-    //    });
+
     router.get('/feeds', function(req, res) {
         console.log('Router for /feeds');
-    });
-    router.put('/feeds/subscribe', function(req, res) {
-            logger.debug('Router for /feeds');
+        FeedModel.find().then((feed)=>{
+            console.log("All Feeds Listed");
+            res.json({
+                message: "All Feeds",
+                data: feed
+            });
+        }).catch((err)=>{
+            console.log(err);
         });
+    });
+    
+    router.put('/feeds/subscribe', function(req, res) {
+        console.log('Router for /feeds/subscribe');
+    });
 
     app.use('/api/v1.0', router);
 
