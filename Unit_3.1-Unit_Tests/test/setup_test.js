@@ -1,7 +1,9 @@
 var async = require('async');
+const mongoClient = require('mongodb').MongoClient;
+var dbConfig = require('../config/db');
 
 function connectDB(callback) {
-    mongoClient.connect(dbConfig.testDBURL, function(err, db) {
+    mongoClient.connect(dbConfig.url, function(err, db) {
         assert.equal(null, err);
         reader_test_db = db;
         console.log("Connected correctly to server");
@@ -12,10 +14,10 @@ function connectDB(callback) {
 
 function dropUserCollection(callback) {
     console.log("dropUserCollection");
-    user = reader_test_db.collection('user');
+    user = reader_test_db.collection('users');
     if (undefined != user) {
         user.drop(function(err, reply) {
-            console.log('user collection dropped');
+            console.log('users collection dropped');
             callback(0);
         });
     } else {

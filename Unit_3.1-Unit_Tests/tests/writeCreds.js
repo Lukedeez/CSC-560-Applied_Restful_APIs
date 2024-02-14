@@ -19,7 +19,7 @@ function connectDB(callback) {
 
 function lookupUserKeys(callback) {
     console.log("lookupUserKeys");
-    user_coll = reader_test_db.collection('user');
+    user_coll = reader_test_db.collection('users');
     user_coll.find({email : TU_EMAIL_REGEX}).toArray(function(err, users) {
         users_array = users;
         callback(null);
@@ -37,5 +37,7 @@ function writeCreds(callback) {
 function closeDB(callback) {
     reader_test_db.close();
 }
+
+connectDB();
 
 async.series([connectDB, lookupUserKeys, writeCreds, closeDB]);

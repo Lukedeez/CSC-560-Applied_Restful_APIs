@@ -6,6 +6,8 @@ var app = express();
 var morgan = require('morgan');
 var routes = require("./app/routes");
 var db	 = require('./config/db');
+var fspec = require('./tests/feed_spec');
+//var wCreds = require('./tests/writeCreds');
 //var security = require('./config/security');
 
 app.use(morgan('dev'));
@@ -23,10 +25,11 @@ mongo.then(() => {
     console.log(error, 'error');
 });
 
+//wCreds.use.addEmptyFeedListTest()
+//fspec.addEmptyFeedListTest();   // testing
 
 app.use(bodyParser.urlencoded({ extended: true }));
 routes.addAPIRouter(app, mongoose, stormpath);
-
 
 app.use(function(req, res, next){
    res.status(404);
@@ -34,6 +37,9 @@ app.use(function(req, res, next){
 });
 
 app.listen(port);
+
+
+
 
 console.log('Magic happens on port ' + port);
 exports = module.exports = app;

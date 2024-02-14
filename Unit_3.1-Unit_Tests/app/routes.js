@@ -18,7 +18,6 @@ var userSchema = new mongoose.Schema({
 userSchema.index({email : 1}, {unique:true});
 //userSchema.index({sp_api_key_id : 1}, {unique:true});
 
-
 var UserModel = mongoose.model( 'User', userSchema );
 var feedSchema = new mongoose.Schema({
     feedURL: { type: String, trim:true },
@@ -86,16 +85,35 @@ exports.addAPIRouter = function(app, mongoose, stormpath) {
     });
 
 
-
     var router = express.Router();
+
+    router.get('/', function(req, res) {
+        console.log('Router for /');
+        res.json({
+            message: "Root Directory"
+        });
+    });
+
     router.post('/user/enroll', function(req, res) {
-        logger.debug('Router for /user/enroll');
+        console.log('Router for /user/enroll');
+        var user = new UserModel();
+        user.email = req.body.email;
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
+        user.save().then(()=>{
+            console.log("New User Enrolled");
+            res.json({
+                message: "New User "+user.firstName+" Enrolled!",
+                data: user
+            });
+        }).catch((err)=>{
+            console.log(err);
+        })
     });
 
     router.get('/feeds', function(req, res) {
         console.log('Router for /feeds');
         FeedModel.find().then((feed)=>{
-            console.log("All Feeds Listed");
             res.json({
                 message: "All Feeds",
                 data: feed
@@ -104,7 +122,7 @@ exports.addAPIRouter = function(app, mongoose, stormpath) {
             console.log(err);
         });
     });
-    
+
     router.put('/feeds/subscribe', function(req, res) {
         console.log('Router for /feeds/subscribe');
     });

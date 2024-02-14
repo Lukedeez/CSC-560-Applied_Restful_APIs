@@ -1,8 +1,8 @@
-TEST_USERS = require('/tmp/readerTestCreds.js');
+TEST_USERS = require('../tmp/readerTestCreds.js');
 var frisby = require('frisby');
-var tc = require('./config/test_config');
+var tc = require('../test/config/test_config');
 var async = require('async');
-var dbConfig = require('./config/db.js');
+var dbConfig = require('../config/db.js');
 var dilbertFeedURL = 'http://feeds.feedburner.com/DilbertDailyStrip';
 var nycEaterFeedURL = 'http://feeds.feedburner.com/eater/nyc';
 
@@ -23,7 +23,7 @@ function subOneFeed(callback) {
     var user = TEST_USERS[0];
     frisby.create('PUT Add feed sub for user ' + user.email)
             .put(tc.url + '/feeds/subscribe', {'feedURL' : dilbertFeedURL})
-            .auth(user.sp_api_key_id, user.sp_api_key_secret)
+            //.auth(user.sp_api_key_id, user.sp_api_key_secret)
             .expectStatus(201)
             .expectHeader('Content-Type', 'application/json; charset=utf-8')
             .expectJSONLength('user.subs', 1)
@@ -36,7 +36,7 @@ function subDuplicateFeed(callback) {
     frisby.create('PUT Add duplicate feed sub for user ' + user.email)
             .put(tc.url + '/feeds/subscribe',
                  {'feedURL' : dilbertFeedURL})
-            .auth(user.sp_api_key_id, user.sp_api_key_secret)
+            //.auth(user.sp_api_key_id, user.sp_api_key_secret)
             .expectStatus(201)
             .expectHeader('Content-Type', 'application/json; charset=utf-8')
             .expectJSONLength('user.subs', 1)
@@ -49,7 +49,7 @@ function subSecondFeed(callback) {
     frisby.create('PUT Add second feed sub for user ' + user.email)
             .put(tc.url + '/feeds/subscribe',
                  {'feedURL' : nycEaterFeedURL})
-            .auth(user.sp_api_key_id, user.sp_api_key_secret)
+            //.auth(user.sp_api_key_id, user.sp_api_key_secret)
             .expectStatus(201)
             .expectHeader('Content-Type', 'application/json; charset=utf-8')
             .expectJSONLength('user.subs', 2)
@@ -62,7 +62,7 @@ function subOneFeedSecondUser(callback) {
     frisby.create('PUT Add one feed sub for second user ' + user.email)
             .put(tc.url + '/feeds/subscribe',
                  {'feedURL' : nycEaterFeedURL})
-            .auth(user.sp_api_key_id, user.sp_api_key_secret)
+            //.auth(user.sp_api_key_id, user.sp_api_key_secret)
             .expectStatus(201)
             .expectHeader('Content-Type', 'application/json; charset=utf-8')
             .expectJSONLength('user.subs', 1)
