@@ -1,0 +1,29 @@
+<h3>Add Player</h3>
+
+<form [formGroup]="addPlayerForm" (ngSubmit)="onSubmit()">
+
+    <div>
+        <label for="name">
+            Name
+        </label>
+        <input id="name" type="text" formControlName="name">
+    </div>
+
+    <div>
+        <label for="jerseyNumber">
+           Jersey #
+        </label>
+        <input id="jerseyNumber" type="number" formControlName="jerseyNumber">
+    </div>
+
+    <div>
+        <label for="position">
+            Position
+        </label>
+        <input id="position" type="text" formControlName="position">
+    </div>
+
+    <button class="button" type="submit">Add Player</button>
+    <button class="button fancy-button" routerLink="/players">Cancel</button>
+    
+</form>

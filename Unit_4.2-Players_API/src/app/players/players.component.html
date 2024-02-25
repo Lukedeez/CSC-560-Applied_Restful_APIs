@@ -1,0 +1,75 @@
+
+<a routerLink="/add-player" class="button">
+    Add Player
+</a>
+
+<h1>{{selected}}</h1>
+
+<div *ngFor="let player of players; let cnt = index">
+  <a [title]="player.name + ' details'"
+     [routerLink]="['/players', player._id]">
+    <table>
+       <tr><td colspan="2"><hr></td></tr>
+       <tr>
+          <td>
+            {{cnt+1}}.
+          </td>
+          <td >
+            <b>{{ player.name }}</b>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            {{ player.position }} <b>#{{ player.jerseyNumber }}</b>
+          </td>
+        </tr>
+
+        <tr *ngIf="queried==true">
+          <td></td>
+          <td >
+            Rushing Yards: {{ player.rushingYards }}
+          </td>
+        </tr>
+        <tr *ngIf="queried==true && player.position=='Quarterback'">
+          <td></td>
+          <td >
+            Touch Downs Thrown: {{ player.touchdownsThrown }}
+          </td>
+        </tr>
+        <tr *ngIf="queried==true && player.position!='Quarterback'">
+          <td></td>
+          <td >
+            Sacks: {{ player.sacks }}
+          </td>
+        </tr>
+        <tr *ngIf="queried==true && player.position=='Quarterback'">
+          <td></td>
+          <td >
+            Sacked: {{ player.sacked }}
+          </td>
+        </tr>
+
+        <tr *ngIf="queried==true">
+          <td></td>
+          <td >
+            Field Goals Made: {{ player.fieldGoalsMade }}
+          </td>
+        </tr>
+        <tr *ngIf="queried==true">
+          <td></td>
+          <td >
+            Field Goals Missed: {{ player.fieldGoalsMissed }}
+          </td>
+        </tr>
+        <tr *ngIf="queried==true">
+          <td></td>
+          <td >
+            Catches Made: {{ player.catchesMade }}
+          </td>
+        </tr>
+        <tr><td colspan="2"></td></tr>
+    </table>
+  </a>
+</div>
+

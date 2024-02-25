@@ -1,0 +1,79 @@
+<h3>Edit Player</h3>
+
+<form [formGroup]="editPlayerForm" (ngSubmit)="onSubmit()">
+
+    <div>
+        <label for="name">
+            Name
+        </label>
+        <input id="name" type="text" formControlName="name">
+    </div>
+
+    <div>
+        <label for="jerseyNumber">
+           Jersey #
+        </label>
+        <input id="jerseyNumber" type="number" formControlName="jerseyNumber">
+    </div>
+
+    <div>
+        <label for="position">
+            Position
+        </label>
+        <input id="position" type="text" formControlName="position">
+    </div>
+
+    <div>
+        <label for="seasonYear">
+            Season Year
+        </label>
+        <input id="seasonYear" type="number" formControlName="seasonYear">
+    </div>
+
+    <div>
+        <label for="rushingYards">
+            Rushing Yards
+        </label>
+        <input id="rushingYards" type="number" formControlName="rushingYards">
+    </div>
+    <div *ngIf="player.position=='Quarterback'">
+        <label for="touchdownsThrown">
+            Touch Downs Thrown
+        </label>
+        <input id="touchdownsThrown" type="number" formControlName="touchdownsThrown">
+    </div>
+    <div *ngIf="player.position!='Quarterback'">
+        <label for="sacks">
+            Sacks
+        </label>
+        <input id="sacks" type="number" formControlName="sacks">
+    </div>
+    <div *ngIf="player.position=='Quarterback'">
+        <label for="sacked">
+            Sacked
+        </label>
+        <input id="sacked" type="number" formControlName="sacked">
+    </div>
+    <div>
+        <label for="fieldGoalsMade">
+            Field Goals Made
+        </label>
+        <input id="fieldGoalsMade" type="number" formControlName="fieldGoalsMade">
+    </div>
+    <div>
+        <label for="fieldGoalsMissed">
+            Field Goals Missed
+        </label>
+        <input id="fieldGoalsMissed" type="number" formControlName="fieldGoalsMissed">
+    </div>
+    <div>
+        <label for="catchesMade">
+            Catches Made
+        </label>
+        <input id="catchesMade" type="number" formControlName="catchesMade">
+    </div>
+
+    <button class="button" type="submit">Save Player</button>
+    <button class="button fancy-button" routerLink="/players">Cancel</button>
+    
+</form>

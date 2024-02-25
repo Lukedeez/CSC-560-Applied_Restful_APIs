@@ -1,0 +1,100 @@
+<h2>Player Details</h2>
+
+<div *ngIf="player">
+  <table>
+    <tr>
+      <td>
+        <b>{{ player.name }}</b>
+      </td>
+      <td></td>
+      </tr>
+      <tr>
+      <td>
+        <b>#{{ player.jerseyNumber }}</b>
+      </td>
+      <td>
+        {{ player.position }}
+      </td>
+    </tr>
+    <tr><td colspan="3"><hr></td></tr>
+    <tr>
+      <td>
+        <b>Season Year</b>
+      </td>
+      <td colspan="2">
+        {{ player.seasonYear }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Rushing Yards</b>
+      </td>
+      <td colspan="2">
+        {{ player.rushingYards }}
+      </td>
+    </tr>
+    <tr *ngIf="player.position=='Quarterback'">
+      <td>
+        <b>Touch Downs Thrown</b>
+      </td>
+      <td colspan="2">
+        {{ player.touchdownsThrown }}
+      </td>
+    </tr>
+    <tr *ngIf="player.position!='Quarterback'">
+      <td>
+        <b>Sacks</b>
+      </td>
+      <td colspan="2">
+        {{ player.sacks }}
+      </td>
+    </tr>
+    <tr *ngIf="player.position=='Quarterback'">
+      <td>
+        <b>Sacked</b>
+      </td>
+      <td colspan="2">
+        {{ player.sacked }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Field Goals Made</b>
+      </td>
+      <td colspan="2">
+        {{ player.fieldGoalsMade }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Field Goals Missed</b>
+      </td>
+      <td colspan="2">
+        {{ player.fieldGoalsMissed }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Catches Made</b>
+      </td>
+      <td colspan="2">
+        {{ player.catchesMade }}
+      </td>
+    </tr>
+    <tr><td><br></td></tr>
+  </table>
+
+  <a 
+      [title]="'Edit '+player.name"
+      [routerLink]="['/edit-player', player._id]"
+      class="button">
+      Edit {{ player.name }}
+    </a>
+
+    <button type="button" (click)="delete(player._id)">
+        Delete {{ player.name }}
+    </button>
+
+    <button class="button fancy-button" routerLink="/players">Cancel</button>
+
+</div>

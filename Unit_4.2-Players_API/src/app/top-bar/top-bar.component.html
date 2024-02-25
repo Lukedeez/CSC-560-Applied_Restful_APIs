@@ -1,0 +1,11 @@
+<a [routerLink]="['/']">
+  <h1>Team</h1>
+</a>
+
+  <div>
+    <label for="topStats">Top Player Stats</label>
+    <select id="topStats" name="topStats" [(ngModel)]="currentRoute" (change)="routeTo(currentRoute)">
+      <!-- ngValue can be used to bind object while value is suitable for binding string -->
+      <option *ngFor="let r of routes" [ngValue]="r.url">{{r.value}}</option>
+    </select>
+  </div>
