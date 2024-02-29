@@ -1,0 +1,184 @@
+<div *ngIf="queried; else edit">
+    <h2>{{value}}</h2>
+    <hr>
+</div>
+
+<ng-template #edit>
+    <div *ngIf="selected; else med">
+        <h2>Edit Media</h2>
+    </div>    
+    <ng-template #med>
+        <div>
+            <h2>Media</h2>
+        </div>
+    </ng-template>
+    <hr>
+    <div *ngIf="selected">
+        <form [formGroup]="editMediaForm" (ngSubmit)="onSubmit()">
+
+            <div>
+                <label for="Title">
+                    Title
+                </label>
+                <input id="Title" type="text" formControlName="Title">
+            </div>
+        
+            <div>
+                <label for="Year">
+                    Year
+                </label>
+                <input id="Year" type="text" formControlName="Year">
+            </div>
+            <div>
+                <label for="Rated">
+                    Rated
+                </label>
+                <input id="Rated" type="text" formControlName="Rated">
+            </div>
+            <div>
+                <label for="Released">
+                    Released
+                </label>
+                <input id="Released" type="text" formControlName="Released">
+            </div>
+            <div>
+                <label for="Runtime">
+                    Runtime
+                </label>
+                <input id="Runtime" type="text" formControlName="Runtime">
+            </div>
+            <div>
+                <label for="Genre">
+                    Genre
+                </label>
+                <input id="Genre" type="text" formControlName="Genre">
+            </div>
+            <div>
+                <label for="Plot">
+                    Plot
+                </label>
+                <input id="Plot" type="text" formControlName="Plot">
+            </div>
+            <div>
+                <label for="Poster">
+                    Poster
+                </label>
+                <input id="Poster" type="text" formControlName="Poster">
+            </div>
+            <div>
+                <label for="Metascore">
+                    Metascore
+                </label>
+                <input id="Metascore" type="text" formControlName="Metascore">
+            </div>
+            <div>
+                <label for="imdbRating">
+                    imdbRating
+                </label>
+                <input id="imdbRating" type="text" formControlName="imdbRating">
+            </div>
+            <div>
+                <label for="imdbVotes">
+                    imdbVotes
+                </label>
+                <input id="imdbVotes" type="text" formControlName="imdbVotes">
+            </div>
+            <div>
+                <label for="imdbID">
+                    imdbID
+                </label>
+                <input id="imdbID" type="text" formControlName="imdbID">
+            </div>
+            <div>
+                <label for="Type">
+                    Type
+                </label>
+                <select id="Type" formControlName="Type" [(ngModel)]="mediaType" (change)="isType($event)">
+                    <option value="movie" [selected]="mediaType=='movie'">Movie</option>
+                    <option value="series" [selected]="mediaType=='series'">Series</option>
+                </select>
+            </div>
+            <div>
+                <label for="watched">
+                    Watched
+                </label>
+                <select id="watched" formControlName="watched" [(ngModel)]="watched" (change)="isWatched($event)">
+                    <option [value]="0" [selected]="watched==0">No</option>
+                    <option [value]="1" [selected]="watched==1">Yes</option>
+                </select>
+            </div>
+            <div *ngIf="watched=='1' || watched==1">
+                <label for="myRating">
+                     My Rating
+                </label>
+                <input id="myRating" type="number" formControlName="myRating" max="10" min="0" step=".1">
+            </div>
+        
+            <button class="button fancy-button" type="submit">Save Media</button>
+            <button class="button fancy-button" routerLink="/media">Cancel</button>
+        </form>
+    </div>
+
+</ng-template>
+
+
+
+<div *ngFor="let m of media; let cnt = index">
+    <div *ngIf="m.Type==='movie'; else series">
+        <table>
+            <tr>
+                <td>{{ cnt+1 }}. </td>
+                <td>
+                    <a 
+                        [title]="m.Title + ' details'"
+                        [routerLink]="['/movies', m._id]">
+                        <b> {{ m.Title }} ({{ m.Year}}) </b>
+                    </a>
+                </td>
+            </tr>
+            <tr *ngIf="queried">
+                <td></td>
+                <td>IMDB Rating: {{ m.imdbRating }}</td>
+            </tr>
+            <tr *ngIf="queried">
+                <td></td>
+                <td>IMDB Votes: {{ m.imdbVotes}}</td>
+            </tr>
+            <tr *ngIf="queried">
+                <td></td>
+                <td>My Rating: {{ m.myRating }}</td>
+            </tr>
+            <tr *ngIf="queried"><td><hr></td><td><hr></td></tr>
+        </table>
+        
+    </div>
+    <ng-template #series>
+        <div>
+            <table>
+                <tr>
+                    <td>{{ cnt+1 }}. </td>
+                    <td>
+                        <a 
+                        [title]="m.Title + ' details'"
+                        [routerLink]="['/series', m._id]">
+                        <b> {{ m.Title }} ({{ m.Year}}) </b>
+                    </a>
+                    </td>
+                </tr>
+                <tr *ngIf="queried">
+                    <td></td>
+                    <td>My Rating: {{ m.myRating }}</td>
+                </tr>
+                <tr *ngIf="queried">
+                    <td></td>
+                    <td>IMDB Rating: {{ m.imdbRating }}</td>
+                </tr>
+                <tr *ngIf="queried">
+                    <td></td>
+                    <td>IMDB Votes: {{ m.imdbVotes}}</td>
+                </tr>
+                <tr *ngIf="queried"><td><hr></td><td><hr></td></tr>
+            </table>
+        </div>
+    </ng-template>
+</div>

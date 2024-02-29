@@ -1,0 +1,11 @@
+<a [routerLink]="['/media']"><h2>Media</h2></a>
+<a [routerLink]="['/movies']"><h2>Movies</h2></a>
+<a [routerLink]="['/series']"><h2>Series</h2></a>
+<a [routerLink]="['/add-media']"><h2>Add Media</h2></a>
+
+<div>
+    <label for="searches">Top Searches </label>
+    <select id="searches" name="searches" [(ngModel)]="currentRoute" (change)="routeTo(currentRoute)">
+      <option *ngFor="let r of routes" [ngValue]="r.url">{{r.value}}</option>
+    </select> 
+</div>

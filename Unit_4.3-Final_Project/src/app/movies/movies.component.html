@@ -1,0 +1,47 @@
+<h2>Movies</h2>
+<hr>
+<div *ngIf="media">
+    <div *ngFor="let movie of media; let cnt = index">
+        <div *ngIf="selected; else movies">
+            <h2>{{ movie.Title }} ({{ movie.Year}})</h2>
+            
+            <h3>Rated: {{ movie.Rated }}</h3>
+            <h3>Released: {{ movie.Released }}</h3>
+            <h3>Runtime: {{ movie.Runtime }}</h3>
+            <h3>Genre: {{ movie.Genre }}</h3>
+            <h3>Plot: {{ movie.Plot }}</h3>
+            <h3>Poster: {{ movie.Poster }}</h3>
+            <h3>Metascore: {{ movie.Metascore }}</h3>
+            
+            <h3>imdbRating: {{ movie.imdbRating }}</h3>
+            <h3>imdbVotes: {{ movie.imdbVotes }}</h3>
+            <h3>imdbID: {{ movie.imdbID }}</h3>
+
+            <h3 *ngIf="movie.watched==true">My Rating: {{ movie.myRating }}</h3>
+            <img src='https://www.imdb.com/title/tt0480249/mediaviewer/rm2203650560/?ref_=tt_ov_i'>
+
+            <button class="button fancy-button" [routerLink]="['/media', movie._id]">Edit {{ movie.Title }}</button>
+            <button type="button" (click)="deleteMedia(movie._id)">
+                Delete {{ movie.Title }}
+            </button>
+            <button class="button fancy-button" routerLink="/media">Cancel</button>
+        </div>
+
+        <ng-template #movies>
+            <h3 >
+                {{ cnt+1 }}.
+                <a 
+                [title]="movie.Title + ' details'"
+                [routerLink]="['/movies', movie._id]">
+                {{ movie.Title }} ({{ movie.Year}})
+                </a>
+            </h3>
+        </ng-template>
+        
+
+    </div>
+
+
+    
+
+</div>
