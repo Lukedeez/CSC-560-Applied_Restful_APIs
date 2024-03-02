@@ -3,11 +3,11 @@
 <div *ngIf="media">
     <div *ngFor="let movie of media; let cnt = index">
         <div *ngIf="selected; else movies">
-            <button class="button fancy-button" [routerLink]="['/media', movie._id]">Edit {{ movie.Title }}</button>
-            <button type="button" (click)="deleteMedia(movie._id)">
-                Delete {{ movie.Title }}
-            </button>
-            <button class="button fancy-button" routerLink="/media">Cancel</button>
+            <div class="buttons">
+                <button class="edit" [routerLink]="['/media', movie._id]">Edit</button>
+                <button class="delete" (click)="deleteMedia(movie._id)">Delete</button>
+                <button class="cancel" routerLink="/media">Cancel</button>
+            </div>
 
             <h2>{{ movie.Title }} ({{ movie.Year}})</h2>
             <table>
@@ -54,7 +54,7 @@
                 </tr>
                 <tr>
                     <td><b>imdbID:</b></td>
-                    <td>{{ movie.imdbID }}</td>
+                    <td><a href="https://www.imdb.com/title/{{ movie.imdbID }}/">{{ movie.imdbID }}</a></td>
                 </tr>
                 <tr>
                     <td><b>My Rating:</b></td>

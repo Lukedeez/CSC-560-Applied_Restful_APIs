@@ -16,8 +16,8 @@
     <div *ngIf="selected">
         <form [formGroup]="editMediaForm" (ngSubmit)="onSubmit()">
             <table>
-                <tr><th>Title:</th><td><input id="Title" type="text" formControlName="Title"></td></tr>
-                <tr><th>Year:</th><td><input id="Year" type="text" formControlName="Year"></td></tr>
+                <tr><th>Title:</th><td><input id="Title" type="text" formControlName="Title" placeholder="The Dark Knight"></td></tr>
+                <tr><th>Year:</th><td><input id="Year" type="text" formControlName="Year" placeholder="1999"></td></tr>
                 <tr><th>Rated:</th><td><input id="Rated" type="text" formControlName="Rated" placeholder="PG-13"></td></tr>
                 <tr><th>Released:</th><td><input id="Released" type="text" formControlName="Released" placeholder="Aug 5 2021"></td></tr>
                 <tr><th>Runtime:</th><td><input id="Runtime" type="text" formControlName="Runtime" placeholder="120 mins"></td></tr>
@@ -37,7 +37,7 @@
                     <option [value]="1" [selected]="watched==1">Yes</option>
                 </select></td></tr>
                 <tr *ngIf="watched=='1' || watched==1"><th>My Rating:</th><td><input id="myRating" type="number" formControlName="myRating" max="10" min="0" step=".1"></td></tr>
-                <tr><td></td><td><button class="button fancy-button" type="submit">Save Media</button> <button class="button fancy-button" routerLink="/media">Cancel</button></td></tr>
+                <tr><td></td><td><button class="add" type="submit">Save Media</button> <button class="cancel" routerLink="/media">Cancel</button></td></tr>
             </table>
         </form>
     </div>
@@ -49,7 +49,7 @@
         <table *ngIf="list || queried">
             <tr>
                 <td><h3>{{ cnt+1 }}. </h3></td>
-                <td rowspan="4">
+                <td rowspan="5">
                     <img width="75" src="{{m.Poster}}">
                 </td>
                 <td>
@@ -74,7 +74,7 @@
                 <td></td>
                 <td>My Rating: {{ m.myRating }}</td>
             </tr>
-            <tr *ngIf="queried"><td><hr></td><td><hr></td></tr>
+            <tr *ngIf="queried"><td colspan="3"><hr></td></tr>
         </table>
     </div>
 
@@ -83,7 +83,7 @@
             <table *ngIf="list || queried">
                 <tr>
                     <td><h3>{{ cnt+1 }}. </h3></td>
-                    <td rowspan="4">
+                    <td rowspan="5">
                         <img width="75" src="{{m.Poster}}">
                     </td>
                     <td>
@@ -108,7 +108,7 @@
                     <td></td>
                     <td>My Rating: {{ m.myRating }}</td>
                 </tr>
-                <tr *ngIf="queried"><td><hr></td><td><hr></td></tr>
+                <tr *ngIf="queried"><td colspan="3"><hr></td></tr>
             </table>
         </div>
     </ng-template>

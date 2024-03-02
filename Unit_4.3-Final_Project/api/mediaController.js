@@ -9,7 +9,7 @@ exports.index = async function (req, res) {
         const mediaFound = await Media.find({}).sort({Title:1}).collation({locale:"en", caseLevel:true});
         if (mediaFound != null) {
             console.log("All Media Listed");
-            console.log(mediaFound);
+            //console.log(mediaFound);
             message = "All Media Details"
         } else {
             console.log("No media found");
@@ -45,7 +45,7 @@ exports.add = function (req, res) {
     media.myRating = req.body.myRating;
 //Save and check error
     media.save().then(()=>{
-        console.log("New media Added");
+        console.log("New media Added: "+media.Title);
         res.json({
             message: "New media "+media.Title+" Added!",
             data: media
@@ -61,9 +61,9 @@ exports.view = async function (req, res) {
         let message = "";
         const mediaFound = await Media.findById(req.params.mediaId);
         if (mediaFound != null) {
-            console.log("media Found:");
-            console.log(mediaFound);
-            message = mediaFound.name+" media Details"
+            console.log("Media Found: "+mediaFound.Title);
+            //console.log(mediaFound);
+            message = mediaFound.Title+" media Details"
         } else {
             console.log("No media found with ID: "+req.params.mediaId);
             message = "No media Found";
@@ -101,9 +101,9 @@ exports.update = async function (req, res) {
             mediaUpdate.myRating = req.body.myRating=='undefined'?0:req.body.myRating;
         //save and check errors
             mediaSave = await mediaUpdate.save();
-            console.log("Media Updated:");
-            console.log(mediaSave);
-            message = "Media "+mediaSave.Title+" Updated Successfully";
+            console.log("Media Updated: "+mediaUpdate.Title);
+            //console.log(mediaSave);
+            message = "Media "+mediaUpdate.Title+" Updated Successfully";
         } else {
             console.log("Media Not Found with ID: "+req.params.mediaId);
             message = "Media Not Found";
@@ -123,8 +123,8 @@ exports.update = async function (req, res) {
 exports.delete = async function (req, res) {
     try {
         const mediaDelete = await Media.deleteOne({_id:req.params.mediaId});
-        console.log("Media Deleted");
-        console.log(mediaDelete);
+        console.log("Media Deleted with ID: "+req.params.mediaId);
+        //console.log(mediaDelete);
         res.json({
             status: "success",
             message: "Media Deleted",
@@ -139,6 +139,7 @@ exports.delete = async function (req, res) {
 // movies - newest to oldest
 exports.moviesNew2Old = async function (req, res) {
     try {
+        console.log("QUERY: Movies Newest to Oldest");
         const media = await Media.find({Type:'movie'}).sort({Year:-1});
         res.json({ media });
     } catch (err) {
@@ -149,6 +150,7 @@ exports.moviesNew2Old = async function (req, res) {
 //movies - rating high to low
 exports.moviesRatingHigh2Low = async function (req, res) {
     try {
+        console.log("QUERY: Movies Rating Highest to Lowest");
         const media = await Media.find({Type:'movie'}).sort({imdbRating:-1});
         res.json({ media });
     } catch (err) {
@@ -159,6 +161,7 @@ exports.moviesRatingHigh2Low = async function (req, res) {
 //media - watched my ratings high to low
 exports.watchedMyRatingsHigh2Low = async function (req, res) {
     try {
+        console.log("QUERY: My Watched Ratings Highest to Lowest");
         const media = await Media.find({watched:1}).sort({myRating:-1});
         res.json({ media });
     } catch (err) {
@@ -169,6 +172,7 @@ exports.watchedMyRatingsHigh2Low = async function (req, res) {
 // media - most voted
 exports.mediaMostVoted = async function (req, res) {
     try {
+        console.log("QUERY: Media Most IMDB Voted");
         const media = await Media.find({}).sort({imdbVotes:-1}).limit(1);
         res.json({ media });
     } catch (err) {
@@ -179,6 +183,7 @@ exports.mediaMostVoted = async function (req, res) {
 // series - rating high to low
 exports.seriesRatingHigh2Low = async function (req, res) {
     try {
+        console.log("QUERY: Series Rating Highest to Lowest");
         const media = await Media.find({Type:'series'}).sort({imdbRating:-1});
         res.json({ media });
     } catch (err) {

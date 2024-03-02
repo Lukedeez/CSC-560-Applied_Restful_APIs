@@ -3,8 +3,8 @@
 
 <form [formGroup]="addMediaForm" (ngSubmit)="onSubmit()">
     <table>
-        <tr><th>Title:</th><td><input id="Title" type="text" formControlName="Title"></td></tr>
-        <tr><th>Year:</th><td><input id="Year" type="text" formControlName="Year"></td></tr>
+        <tr><th>Title:</th><td><input id="Title" type="text" formControlName="Title" placeholder="The Dark Knight"></td></tr>
+        <tr><th>Year:</th><td><input id="Year" type="text" formControlName="Year" placeholder="1999"></td></tr>
         <tr><th>Rated:</th><td><input id="Rated" type="text" formControlName="Rated" placeholder="PG-13"></td></tr>
         <tr><th>Released:</th><td><input id="Released" type="text" formControlName="Released" placeholder="Aug 5 2021"></td></tr>
         <tr><th>Runtime:</th><td><input id="Runtime" type="text" formControlName="Runtime" placeholder="120 mins"></td></tr>
@@ -24,6 +24,6 @@
             <option value=1>Yes</option>
         </select></td></tr>
         <tr *ngIf="watched=='1' || watched==1"><th>My Rating:</th><td><input id="myRating" type="number" formControlName="myRating" max="10" min="0" step=".1"></td></tr>
-        <tr><td></td><td><button class="button" type="submit">Add Media</button> <button class="button fancy-button" routerLink="/media">Cancel</button></td></tr>
+        <tr><td></td><td><button class="add" type="submit">Add Media</button> <button class="cancel" routerLink="/media">Cancel</button></td></tr>
     </table>
 </form>
