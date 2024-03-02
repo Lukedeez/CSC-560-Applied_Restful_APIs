@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MediaService } from '../media.service';
 
-
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
@@ -33,9 +32,7 @@ export class MoviesComponent implements OnInit {
         this.selected = false;
       });
     }
-    
   }
-
 
   deleteMedia(mediaId:any) {
     //alert("Delete "+this.media[0].Title+"?");
@@ -43,10 +40,7 @@ export class MoviesComponent implements OnInit {
       console.log('Deleted Media', mediaId);
       this.mediaService.delete(mediaId);
     }
-    
   }
-
-
 
   constructor(
     private mediaService: MediaService,

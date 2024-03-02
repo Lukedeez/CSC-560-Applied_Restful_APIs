@@ -35,41 +35,5 @@ router.route('/movies/:mediaId')
 router.route('/series/:mediaId')
     .get(mediaController.view);
 
-
-var userController = require('./usersController');
-router.route('/users')
-    .get(userController.index);
-router.route('/register')
-    .post(userController.add);
-router.route('/login')
-    .post(userController.login)
-router.route('/users/:users_id')
-    .get(userController.view)
-    .patch(userController.update)
-    .put(userController.update)
-    .delete(userController.delete);
-
-//Import Player Controller
-var playerController = require('./playerController');
-// Player routes
-router.route('/players/most-touchdown-passes')
-    .get(playerController.mostTDs);
-router.route('/players/most-rushing-yards')
-    .get(playerController.mostRushYds);
-router.route('/players/least-rushing-yards')
-    .get(playerController.leastRushYds);
-router.route('/players/most-to-least-field-goals')
-    .get(playerController.most2LeastFGs);
-router.route('/players/most-sacks')
-    .get(playerController.mostSacks);
-router.route('/players')
-    .get(playerController.index)
-    .post(playerController.add);
-router.route('/players/:player_id')
-    .get(playerController.view)
-    .patch(playerController.update)
-    .put(playerController.update)
-    .delete(playerController.delete);
-
 //Export API routes
 module.exports = router;

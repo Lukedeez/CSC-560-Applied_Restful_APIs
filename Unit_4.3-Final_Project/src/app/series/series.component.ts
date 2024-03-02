@@ -31,19 +31,6 @@ export class SeriesComponent implements OnInit {
         this.selected = false;
       });
     }
-
-
-
-    /* this.media = this.mediaService.getMovies();
-    //console.log(this.media);
-    const routeParams = this.route.snapshot.paramMap;
-    const mediaIdFromRoute:any = routeParams.get('mediaId');
-    console.log(routeParams);
-    if(this.route.routeConfig?.path=="series/:mediaId") {
-      this.loadMediaDetail(mediaIdFromRoute);
-    } else {
-      this.loadMedia();
-    } */
   }
 
   deleteMedia(mediaId:any) {
@@ -52,21 +39,11 @@ export class SeriesComponent implements OnInit {
       console.log('Deleted Media', mediaId);
       this.mediaService.delete(mediaId);
     }
-    
   }
-
 
   loadMedia() {
     this.media = this.mediaService.getSeries();
   }
-
-  loadMediaDetail(mediaIdFromRoute:any) {
-    //this.mediaService.getMediaDetail("movie", mediaIdFromRoute).subscribe((m:any) => {
-    //  console.log(m.data);
-    //  this.media = m.data;
-    //});
-  }
-
 
   constructor(
     private mediaService: MediaService,

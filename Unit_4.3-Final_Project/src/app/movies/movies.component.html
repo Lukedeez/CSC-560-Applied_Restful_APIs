@@ -3,45 +3,86 @@
 <div *ngIf="media">
     <div *ngFor="let movie of media; let cnt = index">
         <div *ngIf="selected; else movies">
-            <h2>{{ movie.Title }} ({{ movie.Year}})</h2>
-            
-            <h3>Rated: {{ movie.Rated }}</h3>
-            <h3>Released: {{ movie.Released }}</h3>
-            <h3>Runtime: {{ movie.Runtime }}</h3>
-            <h3>Genre: {{ movie.Genre }}</h3>
-            <h3>Plot: {{ movie.Plot }}</h3>
-            <h3>Poster: {{ movie.Poster }}</h3>
-            <h3>Metascore: {{ movie.Metascore }}</h3>
-            
-            <h3>imdbRating: {{ movie.imdbRating }}</h3>
-            <h3>imdbVotes: {{ movie.imdbVotes }}</h3>
-            <h3>imdbID: {{ movie.imdbID }}</h3>
-
-            <h3 *ngIf="movie.watched==true">My Rating: {{ movie.myRating }}</h3>
-            <img src='https://www.imdb.com/title/tt0480249/mediaviewer/rm2203650560/?ref_=tt_ov_i'>
-
             <button class="button fancy-button" [routerLink]="['/media', movie._id]">Edit {{ movie.Title }}</button>
             <button type="button" (click)="deleteMedia(movie._id)">
                 Delete {{ movie.Title }}
             </button>
             <button class="button fancy-button" routerLink="/media">Cancel</button>
+
+            <h2>{{ movie.Title }} ({{ movie.Year}})</h2>
+            <table>
+                <tr>
+                    <td rowspan="11">
+                        <img width="200" src='{{ movie.Poster }}'>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Rated:</b></td>
+                    <td>{{ movie.Rated }}</td>
+                </tr>
+                <tr>
+                    <td><b>Released:</b></td>
+                    <td>{{ movie.Released }}</td>
+                </tr>
+                <tr>
+                    <td><b>Runtime:</b></td>
+                    <td>{{ movie.Runtime }}</td>
+                </tr>
+                <tr>
+                    <td><b>Genre:</b></td>
+                    <td>{{ movie.Genre }}</td>
+                </tr>
+                <tr>
+                    <td><b>Plot:</b></td>
+                    <td>{{ movie.Plot }}</td>
+                </tr>
+                <tr>
+                    <td><b>Metascore:</b></td>
+                    <td>{{ movie.Metascore }}</td>
+                </tr>
+                <tr>
+                    <td><b>imdbRating:</b></td>
+                    <td>{{ movie.imdbRating }}</td>
+                </tr>
+                <tr>
+                    <td><b>imdbVotes:</b></td>
+                    <td>{{ movie.imdbVotes }}</td>
+                </tr>
+                <tr>
+                    <td><b>imdbID:</b></td>
+                    <td>{{ movie.imdbID }}</td>
+                </tr>
+                <tr>
+                    <td><b>My Rating:</b></td>
+                    <td>{{ movie.myRating }}</td>
+                </tr>
+            </table>
+
         </div>
 
         <ng-template #movies>
-            <h3 >
-                {{ cnt+1 }}.
-                <a 
-                [title]="movie.Title + ' details'"
-                [routerLink]="['/movies', movie._id]">
-                {{ movie.Title }} ({{ movie.Year}})
-                </a>
-            </h3>
+            <table>
+                <tr>
+                    <th>{{ cnt+1 }}. </th>
+                    <td>
+                        <img width="75" src="{{movie.Poster}}">
+                    </td>
+                    <td>
+                        <h3>
+                            <a 
+                                [title]="movie.Title + ' details'"
+                                [routerLink]="['/movies', movie._id]">
+                                {{ movie.Title }} ({{ movie.Year}})
+                            </a>
+                        </h3>
+                    </td>
+                </tr>
+            </table>
         </ng-template>
-        
 
     </div>
-
-
-    
-
 </div>

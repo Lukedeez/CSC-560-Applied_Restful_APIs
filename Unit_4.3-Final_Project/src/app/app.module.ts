@@ -28,10 +28,10 @@ import { AddMediaComponent } from './add-media/add-media.component';
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'media/movies-new-to-old', component: MediaComponent },
-        { path: 'media/movie-ratings', component: MediaComponent },
-        { path: 'media/watched-ratings', component: MediaComponent },
-        { path: 'media/most-voted', component: MediaComponent },
-        { path: 'media/series-ratings', component: MediaComponent },
+      { path: 'media/movie-ratings', component: MediaComponent },
+      { path: 'media/watched-ratings', component: MediaComponent },
+      { path: 'media/most-voted', component: MediaComponent },
+      { path: 'media/series-ratings', component: MediaComponent },
       { path: '', component: MediaComponent },
       { path: 'media', component: MediaComponent },
       { path: 'media/:mediaId', component: MediaComponent },
@@ -40,7 +40,6 @@ import { AddMediaComponent } from './add-media/add-media.component';
       { path: 'movies', component: MoviesComponent },
       { path: 'movies/:mediaId', component: MoviesComponent },
       { path: 'add-media', component: AddMediaComponent }
-      
     ])
   ],
   providers: [],

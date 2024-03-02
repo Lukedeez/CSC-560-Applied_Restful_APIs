@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MediaService } from '../media.service';
 import { TopBarComponent } from '../top-bar/top-bar.component';
-import { AnyTxtRecord } from 'dns';
 
 @Component({
   selector: 'app-media',
@@ -20,6 +19,7 @@ export class MediaComponent implements OnInit {
   mediaType:any;
   queried: any = false;
   value:any;
+  list:any = false;
 
   ngOnInit(): void {
 
@@ -42,7 +42,7 @@ export class MediaComponent implements OnInit {
     console.log(routeParams);
     console.log(this.route.routeConfig?.path);
 
-
+    // get media by id
     if(this.route.routeConfig?.path=="media/:mediaId" && !this.queried) {
       console.log("media id");
       this.mediaService.getMediaDetail("media", mediaIdFromRoute).subscribe((m:any) => {
@@ -51,7 +51,6 @@ export class MediaComponent implements OnInit {
         this.media = arr;
         this.med = m.data;
         this.selected = true;
-
         // fills inputs with values
         this.editMediaForm.patchValue({
           id: this.med._id,
@@ -73,15 +72,14 @@ export class MediaComponent implements OnInit {
         });
         this.watched = this.med.watched;
         this.mediaType = this.med.Type;
-
       });
     } else if (!this.queried) {
+      this.list = true;
       this.mediaService.getMedia().subscribe((m:any) => {
         console.log(m.data);
         this.media = m.data;
       });
     }
-  
   }
 
   loadQuery(url:any) {
@@ -100,16 +98,16 @@ export class MediaComponent implements OnInit {
     });
   }
 
-
+  // watched change
   isWatched(e:any) {
     console.log(e.target.value);
     this.watched = e.target.value;
   }
+  // movie or series
   isType(e:any) {
     console.log(e.target.value);
     this.mediaType = e.target.value;
   }
-
 
   onSubmit(): void {
     console.log('Updated Media', this.editMediaForm.value);
@@ -118,7 +116,6 @@ export class MediaComponent implements OnInit {
     alert('Media Successfully Updated');
     this.router.navigate(['media']);
   }
-
 
   editMediaForm = this.formBuilder.group({
     id: '',

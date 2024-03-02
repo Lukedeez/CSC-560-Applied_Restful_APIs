@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MediaService } from '../media.service';
 
@@ -9,6 +9,7 @@ import { MediaService } from '../media.service';
 })
 export class AddMediaComponent {
 
+  @Input({ required: true }) Title!: String;
   watched:any=0;
 
   addMediaForm = this.formBuilder.group({
@@ -34,11 +35,17 @@ export class AddMediaComponent {
     this.watched = e.target.value;
   }
 
+  // process newly added media
   onSubmit(): void {
-    // Process checkout data here
-    console.log('New Media Added', this.addMediaForm.value);
-    this.mediaService.addMedia(this.addMediaForm.value);
-    this.addMediaForm.reset();
+    console.log(this.addMediaForm.value.Title);
+    if(this.addMediaForm.value.Title!="" && this.addMediaForm.value.Year!="") {
+      console.log('New Media Added', this.addMediaForm.value);
+      this.mediaService.addMedia(this.addMediaForm.value);
+      this.addMediaForm.reset();
+    } else {
+      console.log('Title or Year is empty');
+      alert("Media Title or Year is empty");
+    }
   }
 
   constructor(

@@ -84,20 +84,20 @@ exports.update = async function (req, res) {
         let mediaSave = null;
         const mediaUpdate = await Media.findById(req.params.mediaId);
         if (mediaUpdate != null) {
-            mediaUpdate.Title = req.body.Title;
-            mediaUpdate.Year = req.body.Year;
-            mediaUpdate.Rated = req.body.Rated;
-            mediaUpdate.Released = req.body.Released;
-            mediaUpdate.Runtime = req.body.Runtime;
-            mediaUpdate.Genre = req.body.Genre;
-            mediaUpdate.Plot = req.body.Plot;
-            mediaUpdate.Poster = req.body.Poster;
-            mediaUpdate.Metascore = req.body.Metascore;
-            mediaUpdate.imdbRating = req.body.imdbRating;
-            mediaUpdate.imdbVotes = req.body.imdbVotes;
-            mediaUpdate.imdbID = req.body.imdbID;
-            mediaUpdate.Type = req.body.Type;
-            mediaUpdate.watched = req.body.watched==undefined?0:req.body.watched;
+            mediaUpdate.Title = req.body.Title=='undefined'?'':req.body.Title;
+            mediaUpdate.Year = req.body.Year=='undefined'?'':req.body.Year;
+            mediaUpdate.Rated = req.body.Rated=='undefined'?'':req.body.Rated;
+            mediaUpdate.Released = req.body.Released=='undefined'?'':req.body.Released;
+            mediaUpdate.Runtime = req.body.Runtime=='undefined'?'':req.body.Runtime;
+            mediaUpdate.Genre = req.body.Genre=='undefined'?'':req.body.Genre;
+            mediaUpdate.Plot = req.body.Plot=='undefined'?'':req.body.Plot;
+            mediaUpdate.Poster = req.body.Poster=='undefined'?'':req.body.Poster;
+            mediaUpdate.Metascore = req.body.Metascore=='undefined'?'':req.body.Metascore;
+            mediaUpdate.imdbRating = req.body.imdbRating=='undefined'?'':req.body.imdbRating;
+            mediaUpdate.imdbVotes = req.body.imdbVotes=='undefined'?'':req.body.imdbVotes;
+            mediaUpdate.imdbID = req.body.imdbID=='undefined'?'':req.body.imdbID;
+            mediaUpdate.Type = req.body.Type=='undefined'?'':req.body.Type;
+            mediaUpdate.watched = req.body.watched=='undefined'?0:req.body.watched;
             mediaUpdate.myRating = req.body.myRating=='undefined'?0:req.body.myRating;
         //save and check errors
             mediaSave = await mediaUpdate.save();

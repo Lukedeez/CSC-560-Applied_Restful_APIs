@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-
 const BASE_URL = 'http://localhost:8081/api/';
 
 @Injectable({
@@ -19,7 +18,6 @@ export class MediaService {
     return this.http.get(BASE_URL+"media");
   }
   
-
   addMedia(newMedia:any) {
     let body = new URLSearchParams();
       body.set("redirect_uri", "http://localhost:4200/api/media");
@@ -50,7 +48,6 @@ export class MediaService {
   getMovies(){
     return this.media.filter((m: { Type: any; }) => m.Type == "movie").map(a => a);
   }
-
 
   getMediaDetail(mediaType:any, mediaId:any) {
     //console.log(mediaType, mediaId);
@@ -85,9 +82,7 @@ export class MediaService {
       body.set('imdbID', media.imdbID);
       body.set('Type', media.Type);
       body.set('watched', media.watched);
-      //if(media.watched==1){
-        body.set('myRating', media.myRating);
-      //}
+      body.set('myRating', media.myRating);
 
     let headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     let options = { headers: headers };
@@ -105,8 +100,6 @@ export class MediaService {
     private router: Router
     ) { 
     console.log(this.http.get(BASE_URL+"media"));
-    //this.media.push(this.http.get(BASE_URL+"media"));
-    //console.log(this.media);
     this.http.get(BASE_URL+"media").subscribe((m:any) => {
       console.log(m.data);
       this.media = m.data;
